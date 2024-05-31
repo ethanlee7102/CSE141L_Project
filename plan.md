@@ -1,16 +1,21 @@
-# ALU 8:5(first bit is type bit R/I - 0/1)  Reg 4:0  
-  
-## Type R (Type Bit = 0):  
-0000 - add
-0001 - sub
-...
-0111
+## Instruction Set R-Type
+| R-Type        | 8:6         | 5:3         |2:0 | 
+| ----------- | ----------- | ----------- | ----------- |
+| ADD        | 000      | rA         | rB         |
+| SL        | 001      | rA         | rB         |
+| SR        | 010      | rA         | rB         |
+| NAND       | 011      | rA         | rB         |
+| SUB        | 100      | rA         | rB         |
 
-## Type I(Type Bit = 1):
-1000 - addi
-1001 - ld
-1011 - st
-1101 - 
-1110
-1111
-add greater equal to branch zero
+## Instruction Set I-Type
+| I-Type        | 8:6         | 5:3         |2:0 | 
+| ----------- | ----------- | ----------- | ----------- |
+| LD        | 101      | rA         | rB         |
+| ST        | 110      | rA         | rB        |
+| BZ        | 111      | 0(00)         | rA         |  
+| BLT        | 111      | 1(00)         | rA         |  
+
+
+ **For BZ and BLT**  
+(00) how high for lookup table)   
+(make rA always be compared with data_mem[1] or smth)
