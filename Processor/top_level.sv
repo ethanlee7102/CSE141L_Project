@@ -14,7 +14,7 @@ module top_level(
   logic sc_in,   				  // shift/carry out from/to ALU
    		pariQ,              	  // registered parity flag from ALU
 		zeroQ;                    // registered zero flag from ALU 
-  wire  relj;                     // from control to PC; relative jump enable
+  wire  absj;                     // from control to PC; abs jump enable
   wire  pari,
         zero,
 		sc_clr,
@@ -37,6 +37,10 @@ module top_level(
 // lookup table to facilitate jumps/branches
   PC_LUT #(.D(D))
     pl1 (.addr  (how_high),
+         .jt1 (dm1.core[1]),
+         .jt2 (dm1.core[2]),
+         .jt3 (dm1.core[3]),
+         .jt4 (dm1.core[4]),
          .target          );   
 
 // contains machine code
@@ -44,9 +48,9 @@ module top_level(
                .mach_code);
 
 // control decoder
-  Control ctl1(.instr(),
+  Control ctl1(.instr(mach_code),
   .RegDst  (), 
-  .Branch  (relj)  , 
+  .Branch  (absj)  , 
   .how_high ,
   .MemWrite , 
   .ALUSrc   , 
@@ -73,7 +77,7 @@ module top_level(
          .inA    (datA),
 		 .inB    (muxB),
 		 .sc_i   (sc),   // output from sc register
-		 .rslt       ,
+		 .rslt   (rslt),
 		 .sc_o   (sc_o), // input to sc register
 		 .pari  );  
 
