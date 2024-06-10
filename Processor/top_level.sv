@@ -27,12 +27,12 @@ module top_level(
   logic[1:0] how_high;
 // fetch subassembly
   PC #(.D(D)) 					  // D sets program counter width
-     pc1 (.reset            ,
-         .clk              ,
+     pc1 (.reset(reset)            ,
+         .clk(clk)              ,
 		 .reljump_en (relj),
 		 .absjump_en (absj),
-		 .target           ,
-		 .prog_ctr          );
+		 .target(target)           ,
+		 .prog_ctr(prog_ctr)          );
 
 // lookup table to facilitate jumps/branches
   PC_LUT #(.D(D))
@@ -41,11 +41,11 @@ module top_level(
          .jt2 (dm1.core[2]),
          .jt3 (dm1.core[3]),
          .jt4 (dm1.core[4]),
-         .target          );   
+         .target(target)          );   
 
 // contains machine code
-  instr_ROM ir1(.prog_ctr,
-               .mach_code);
+  instr_ROM ir1(.prog_ctr(prog_ctr),
+               .mach_code(mach_code));
 
 // control decoder
   Control ctl1(.instr(mach_code),
