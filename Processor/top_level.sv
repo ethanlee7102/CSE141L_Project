@@ -23,7 +23,7 @@ module top_level(
         ALUSrc;		              // immediate switch
   wire[A-1:0] alu_cmd;
   wire[8:0]   mach_code;          // machine code
-  wire[2:0] rd_addrA, rd_adrB;    // address pointers to reg_file
+  wire[2:0] rd_addrA, rd_addrB;    // address pointers to reg_file
   logic[1:0] how_high;
 // fetch subassembly
   PC #(.D(D)) 					  // D sets program counter width
@@ -63,7 +63,7 @@ module top_level(
   assign rd_addrB = mach_code[5:3];
   assign alu_cmd  = mach_code[8:6];
 
-  reg_file #(.pw(3)) rf1(.dat_in(regfile_dat),	   // loads, most ops
+  reg_file #(.pw(3)) rf1(.dat_in(rslt),	   // loads, most ops
               .clk         ,
               .wr_en   (RegWrite),
               .rd_addrA(rd_addrA),
