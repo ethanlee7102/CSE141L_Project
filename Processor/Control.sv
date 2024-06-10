@@ -2,15 +2,16 @@
 module Control #(parameter opwidth = 3, mcodebits = 9)(
   input [mcodebits-1:0] instr,    // subset of machine code (any width you need)
   input logic zero,
-  output logic RegDst, Branch, how_high,
+  output logic RegDst, Branch,
      MemtoReg, MemWrite, ALUSrc, RegWrite,
+  output logic [1:0] how_high,
   output logic[opwidth-1:0] ALUOp);	   // for up to 8 ALU operations
 
 always_comb begin
 // defaults
   RegDst 	=   'b0;   // 1: not in place  just leave 0
   Branch 	=   'b0;   // 1: branch (jump)
-  how_high = 'b0;    // 
+  how_high = 'b00;    // 
   MemWrite  =	'b0;   // 1: store to memory
   ALUSrc 	=	'b0;   // 1: immediate  0: second reg file output
   RegWrite  =	'b1;   // 0: for store or no op  1: most other operations 
