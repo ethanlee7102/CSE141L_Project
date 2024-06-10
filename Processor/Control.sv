@@ -1,6 +1,7 @@
 // control decoder
 module Control #(parameter opwidth = 3, mcodebits = 9)(
   input [mcodebits-1:0] instr,    // subset of machine code (any width you need)
+  input logic zero,
   output logic RegDst, Branch, how_high,
      MemtoReg, MemWrite, ALUSrc, RegWrite,
   output logic[opwidth-1:0] ALUOp);	   // for up to 8 ALU operations
@@ -53,6 +54,9 @@ case(instr[8:6])    // override defaults with exceptions
   'b111: begin    // branch
     Branch = 'b1;
     how_high = instr[4:3];
+    if (instr[5] == 'b0) begin
+        Branch = zero;  // Branch if zero flag is set
+    end
   end
 // ...
 endcase

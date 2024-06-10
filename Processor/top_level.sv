@@ -49,6 +49,7 @@ module top_level(
 
 // control decoder
   Control ctl1(.instr(mach_code),
+  .zero(zero),
   .RegDst  (), 
   .Branch  (absj)  , 
   .how_high ,
@@ -79,6 +80,7 @@ module top_level(
 		 .sc_i   (sc),   // output from sc register
 		 .rslt   (rslt),
 		 .sc_o   (sc_o), // input to sc register
+     .zero(zero),
 		 .pari  );  
 
   dat_mem dm1(.dat_in(datB)  ,  // from reg_file

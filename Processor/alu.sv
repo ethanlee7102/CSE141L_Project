@@ -32,6 +32,10 @@ always_comb begin
 	3'b100: // SUB
 	  {sc_o,rslt} = inA - inB + sc_i;
   endcase
+
+  zero = (rslt == 8'b0);  
+  pari = ^rslt;          
+
 end
    
 endmodule
