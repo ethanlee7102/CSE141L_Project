@@ -12,7 +12,15 @@ module reg_file #(parameter pw=3)(
 
   logic[7:0] core[2**pw];    // 2-dim array  8 wide  16 deep
 
-// reads are combinational
+	
+
+initial begin
+    integer i;
+    for (i = 0; i < 2**pw; i = i + 1) begin
+      core[i] = 8'b0;
+    end
+  end
+  // reads are combinational
   assign datA_out = core[rd_addrA];
   assign datB_out = core[rd_addrB];
 
