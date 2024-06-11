@@ -13,7 +13,7 @@
 | LD        | 101      | rA         | rB         |
 | ST        | 110      | rA         | rB        |
 | BZ        | 111      | 0(00)         | rA         |  
-| BLT        | 111      | 1(00)         | rA         |  
+| ADDI       | 111      | 1(00)         | rB         |  
 
 
  **For BZ and BLT**  
