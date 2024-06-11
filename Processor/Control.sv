@@ -56,7 +56,7 @@ case(instr[8:6])    // override defaults with exceptions
     Branch = 'b1;
     how_high = instr[4:3];
     if (instr[5] == 'b1) begin
-      Branch = 'b0
+      Branch = 'b0;
       ALUOp = 'b111;
       RegWrite  =	'b1;
     end
