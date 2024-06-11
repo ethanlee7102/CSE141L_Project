@@ -59,8 +59,8 @@ module top_level(
   .MemtoReg(),
   .ALUOp());
 
-  assign rd_addrA = mach_code[2:0];
-  assign rd_addrB = mach_code[5:3];
+  assign rd_addrB = mach_code[2:0];
+  assign rd_addrA = mach_code[5:3];
   assign alu_cmd  = mach_code[8:6];
 
   reg_file #(.pw(3)) rf1(.dat_in(rslt),	   // loads, most ops
