@@ -8,8 +8,8 @@ module top_level(
               prog_ctr;
   wire        RegWrite;
   wire[7:0]   datA,datB,		  // from RegFile
-              muxA, 
-			  rslt,               // alu output
+              muxA, muxMem,
+			  rslt, dat_out,              // alu output
               immed;
   logic sc_in,   				  // shift/carry out from/to ALU
    		pariQ,              	  // registered parity flag from ALU
@@ -20,6 +20,7 @@ module top_level(
 		sc_clr,
 		sc_en,
         MemWrite,
+        MemtoReg,
         ALUSrc;		              // immediate switch
   wire[A-1:0] alu_cmd;
   wire[8:0]   mach_code;          // machine code
@@ -56,7 +57,7 @@ module top_level(
   .MemWrite , 
   .ALUSrc   , 
   .RegWrite   ,     
-  .MemtoReg(),
+  .MemtoReg,
   .ALUOp(),
   .sc_en,
   .sc_clr);
@@ -65,6 +66,8 @@ module top_level(
   assign rd_addrA = mach_code[5:3];
   assign alu_cmd  = mach_code[8:6];
   assign immed = mach_code[4:3];
+
+  assign muxMem = MemtoReg? dat_out : rslt;
 
   reg_file #(.pw(3)) rf1(.dat_in(rslt),	   // loads, most ops
               .clk         ,
@@ -91,7 +94,7 @@ module top_level(
              .clk           ,
 			 .wr_en  (MemWrite), // stores
 			 .addr   (datA),
-             .dat_out());
+             .dat_out(dat_out));
 
 // registered flags from ALU
   always_ff @(posedge clk) begin

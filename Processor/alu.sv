@@ -31,7 +31,7 @@ always_comb begin
   3'b011: // NAND
 	  rslt = ~(inA & inB);
 	3'b100: // SUB
-	  {sc_o,rslt} = inA - inB + sc_i;
+	  {sc_o,rslt} = inB - inA + sc_i;
     3'b111: // add 2 8-bit unsigned; automatically makes carry-out
       {sc_o,rslt} = inA + inB + sc_i;
   endcase
