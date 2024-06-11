@@ -37,10 +37,10 @@ module top_level(
 // lookup table to facilitate jumps/branches
   PC_LUT #(.D(D))
     pl1 (.addr  (how_high),
-         .jt1 (dm1.core[1]),
-         .jt2 (dm1.core[2]),
-         .jt3 (dm1.core[3]),
-         .jt4 (dm1.core[4]),
+         .jt1 (dm.core[1]),
+         .jt2 (dm.core[2]),
+         .jt3 (dm.core[3]),
+         .jt4 (dm.core[4]),
          .target(target)          );   
 
 // contains machine code
@@ -83,7 +83,7 @@ module top_level(
      .zero(zero),
 		 .pari  );  
 
-  dat_mem dm1(.dat_in(datB)  ,  // from reg_file
+  dat_mem dm(.dat_in(datB)  ,  // from reg_file
              .clk           ,
 			 .wr_en  (MemWrite), // stores
 			 .addr   (datA),
