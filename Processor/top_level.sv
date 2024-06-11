@@ -69,7 +69,7 @@ module top_level(
 
   assign muxMem = MemtoReg? dat_out : rslt;
 
-  reg_file #(.pw(3)) rf1(.dat_in(rslt),	   // loads, most ops
+  reg_file #(.pw(3)) rf1(.dat_in(muxMem),	   // loads, most ops
               .clk         ,
               .wr_en   (RegWrite),
               .rd_addrA(rd_addrA),
