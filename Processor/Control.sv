@@ -19,7 +19,7 @@ always_comb begin
   MemtoReg  =	'b0;   // 1: load -- route memory instead of ALU to reg_file data in
   ALUOp	    =   'b000; 
   sc_en    = 'b0;   
-  sc_clr   = 'b0;
+  sc_clr   = 'b1;
 // sample values only -- use what you need
 case(instr[8:6])    // override defaults with exceptions
 

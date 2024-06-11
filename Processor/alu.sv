@@ -10,9 +10,7 @@ module alu(
                pari,     // reduction XOR (output)
 			   zero      // NOR (output)
 );
-initial begin
-    sc_i = 'b0;
-  end
+
 always_comb begin 
   rslt = 'b0;            
   sc_o = 'b0;    
