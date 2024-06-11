@@ -31,7 +31,7 @@ module top_level_tb;
     // Initialize inputs
     reset = 1;
     req = 0;
-    D1.dm.core[5] = 1;
+    D1.dm.core[0] = 1;
 
     // Wait for a few clock cycles
     #20;

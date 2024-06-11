@@ -62,6 +62,7 @@ module top_level(
   assign rd_addrB = mach_code[2:0];
   assign rd_addrA = mach_code[5:3];
   assign alu_cmd  = mach_code[8:6];
+  assign immed = mach_code[4:3];
 
   reg_file #(.pw(3)) rf1(.dat_in(rslt),	   // loads, most ops
               .clk         ,

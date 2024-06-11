@@ -32,8 +32,6 @@ always_comb begin
 	  rslt = ~(inA & inB);
 	3'b100: // SUB
 	  {sc_o,rslt} = inA - inB + sc_i;
-  3'b111:
-    {sc_o,rslt} = inB + how_high + sc_i;
   endcase
 
   zero = (rslt == 8'b0);  
