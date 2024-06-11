@@ -25,38 +25,45 @@ case(instr[8:6])    // override defaults with exceptions
       ALUSrc = 'b0;
       ALUOp = 'b000;  // add:  y = a+b
       RegWrite  =	'b1;
+      sc_clr = 'b1;
   end
   'b001:  begin
       ALUSrc = 'b0;
       ALUOp = 'b001;  // left shift
       RegWrite  =	'b1;
+      sc_en = 'b1;
   end
   'b010:  begin
       ALUSrc = 'b0;
       ALUOp = 'b010;  // right shift
       RegWrite  =	'b1;
+      sc_en = 'b1;
   end
   'b011:  begin 
       ALUSrc = 'b0;
       ALUOp = 'b011;  // NAND
       RegWrite  =	'b1;
+      sc_clr = 'b1;
   end
   'b100:  begin
       ALUSrc = 'b0;
       ALUOp = 'b100;  // SUB
       RegWrite  =	'b1;
+      sc_clr = 'b1;
   end
 
   'b101:  begin				  // load
       ALUSrc = 'b0;
 			MemtoReg = 'b1;
-      RegWrite  =	'b1;    
+      RegWrite  =	'b1; 
+      sc_clr = 'b1;   
   end
   
   'b110:  begin					// store operation
       ALUSrc = 'b0;
       MemWrite = 'b1;      // write to data mem
       RegWrite = 'b0;      // typically don't also load reg_file
+      sc_clr = 'b1;
 	end
 
   'b111: begin    // branch or addi
@@ -67,10 +74,12 @@ case(instr[8:6])    // override defaults with exceptions
       Branch = 'b0;
       ALUSrc = 'b1;
       RegWrite  =	'b1;
+      sc_clr = 'b1;
     end
     if (instr[5] == 'b0) begin
         ALUSrc = 'b0;
         Branch = zero;  // Branch if zero flag is set
+        sc_clr = 'b1;
     end
   end
 // ...
