@@ -78,7 +78,7 @@ module top_level(
   alu alu1(.alu_cmd(alu_cmd),
          .inA    (muxA),
 		 .inB    (datB),
-		 .sc_i   (sc),   // output from sc register
+		 .sc_i   (sc_in),   // output from sc register
      .how_high (how_high),
 		 .rslt   (rslt),
 		 .sc_o   (sc_o), // input to sc register
