@@ -52,9 +52,14 @@ case(instr[8:6])    // override defaults with exceptions
       RegWrite = 'b0;      // typically don't also load reg_file
 	end
 
-  'b111: begin    // branch
+  'b111: begin    // branch or addi
     Branch = 'b1;
     how_high = instr[4:3];
+    if (instr[5] == 'b1) begin
+      Branch = 'b0
+      ALUOp = 'b111;
+      RegWrite  =	'b1;
+    end
     if (instr[5] == 'b0) begin
         Branch = zero;  // Branch if zero flag is set
     end

@@ -78,6 +78,7 @@ module top_level(
          .inA    (datA),
 		 .inB    (muxB),
 		 .sc_i   (sc),   // output from sc register
+     .how_high (how_high),
 		 .rslt   (rslt),
 		 .sc_o   (sc_o), // input to sc register
      .zero(zero),

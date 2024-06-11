@@ -30,6 +30,7 @@ initial begin
 // 32 double-precision operands go into data_mem [0:63]
 // first operand = {data_mem[0],data_mem[1]}  
 //   endian order doesn't matter for program 1, as long as consistent for all values (why?)
+  D1.dm.core[5] = 1;
   for(int loop_ct=0; loop_ct<itrs; loop_ct++) begin
     #100ns;
 	Min = 'd16;						         // start test bench Min at max value
