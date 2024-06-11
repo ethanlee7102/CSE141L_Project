@@ -88,7 +88,7 @@ case(instr[8:6])    // override defaults with exceptions
     end
     if (instr[5] == 'b0) begin
         ALUSrc = 'b0;
-        Branch = zero;  // Branch if zero flag is set
+        Branch = ~zero;  // Branch if zero flag is not set
         sc_clr = 'b1;
         MemtoReg = 'b0;
     end
