@@ -4,7 +4,7 @@ module alu(
   input[2:0] alu_cmd,    // ALU instructions
   input[7:0] inA, inB,	 // 8-bit wide data path
   input      sc_i,       // shift_carry in
-  input how_high, //immediate
+  input[1:0] how_high, //immediate
   output logic[7:0] rslt,
   output logic sc_o,     // shift_carry out
                pari,     // reduction XOR (output)
