@@ -57,7 +57,9 @@ module top_level(
   .ALUSrc   , 
   .RegWrite   ,     
   .MemtoReg(),
-  .ALUOp());
+  .ALUOp()),
+  .sc_en
+  .sc_clr;
 
   assign rd_addrB = mach_code[2:0];
   assign rd_addrA = mach_code[5:3];
