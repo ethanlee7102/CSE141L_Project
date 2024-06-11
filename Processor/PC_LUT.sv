@@ -1,19 +1,20 @@
 module PC_LUT #(parameter D=12)(
   input       [ 1:0] addr,	   // target 4 values
-  input		  [D-1:0] jt1,
-  input		  [D-1:0] jt2,
-  input		  [D-1:0] jt3,
-  input		  [D-1:0] jt4,
+  input       [7:0] jt1,
+  input       [7:0] jt2,
+  input       [7:0] jt3,
+  input       [7:0] jt4,
   output logic[D-1:0] target);
-
-  always_comb case(addr)
-    0: target = jt1;   
-	1: target = jt2;   
-	2: target = jt3;  
-	3: target = jt4;
-	default: target = 'b0;  // jumps to zero 
-  endcase
+  
+  always_comb begin
+    case(addr)
+      0: target = {4'b0000, jt1};   
+      1: target = {4'b0000, jt2};   
+      2: target = {4'b0000, jt3};  
+      3: target = {4'b0000, jt4};
+      default: target = {4'b0000, 8'b0};  // jumps to zero 
+    endcase
+  end
 
 endmodule
-
 
