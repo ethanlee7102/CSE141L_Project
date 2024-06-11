@@ -12,10 +12,12 @@
 | ----------- | ----------- | ----------- | ----------- |
 | LD        | 101      | rA         | rB         |
 | ST        | 110      | rA         | rB        |
-| BZ        | 111      | 0(00)         | rA         |  
+| BZ        | 111      | 0(00)         | rB         |  
 | ADDI       | 111      | 1(00)         | rB         |  
 
 
- **For BZ and BLT**  
+ **For BZ**  
 (00) how high for lookup table)   
-(make rA always be compared with data_mem[1] or smth)
+ **For ADDI** 
+(00) is the immediate 
+eg. 111 1(10) 001 = [r1 = r1 + 2]
