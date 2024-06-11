@@ -11,7 +11,7 @@ module test_bench;
   logic[ 4:0] Max1, Max2;		// addresses of pair w/ largest Hamming distance
   logic[15:0] Tmp[32];		    // cache of 16-bit values assembled from data_mem
 
-  DUT D1(.clk  (clk  ),	        // your design goes here
+  top_level D1(.clk  (clk  ),	        // your design goes here
 		 .start(start),
 		 .done (done )); 
 
