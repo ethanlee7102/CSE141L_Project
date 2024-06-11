@@ -12,7 +12,7 @@ module test_bench;
   logic[15:0] Tmp[32];		    // cache of 16-bit values assembled from data_mem
 
   top_level D1(.clk  (clk  ),	        // your design goes here
-		 .start(start),
+		 .reset(start),
 		 .done (done )); 
 
 always begin
