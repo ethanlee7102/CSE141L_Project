@@ -5,7 +5,8 @@ module Control #(parameter opwidth = 3, mcodebits = 9)(
   output logic RegDst, Branch,
      MemtoReg, MemWrite, ALUSrc, RegWrite,
   output logic [1:0] how_high,
-  output logic[opwidth-1:0] ALUOp);	   // for up to 8 ALU operations
+  output logic[opwidth-1:0] ALUOp,	   // for up to 8 ALU operations
+  output logic sc_en, sc_clr);   
 
 always_comb begin
 // defaults
@@ -17,6 +18,8 @@ always_comb begin
   RegWrite  =	'b1;   // 0: for store or no op  1: most other operations 
   MemtoReg  =	'b0;   // 1: load -- route memory instead of ALU to reg_file data in
   ALUOp	    =   'b000; 
+  sc_en    = 'b0;   
+  sc_clr   = 'b0;
 // sample values only -- use what you need
 case(instr[8:6])    // override defaults with exceptions
 
