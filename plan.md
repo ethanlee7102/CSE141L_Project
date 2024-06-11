@@ -1,3 +1,6 @@
+All instructions that write to registers write to regB  
+eg. 000 001 010 = [r2 = r1 + r2]
+
 ## Instruction Set R-Type
 | R-Type        | 8:6         | 5:3         |2:0 | 
 | ----------- | ----------- | ----------- | ----------- |
