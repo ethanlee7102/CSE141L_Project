@@ -10,14 +10,14 @@ module Control #(parameter opwidth = 3, mcodebits = 9)(
 
 always_comb begin
 // defaults
-  RegDst 	=   'b0;   // 1: not in place  just leave 0
-  Branch 	=   'b0;   // 1: branch (jump)
-  how_high = 'b00;    // 
-  MemWrite  =	'b0;   // 1: store to memory
-  ALUSrc 	=	'b0;   // 1: immediate  0: second reg file output
-  RegWrite  =	'b1;   // 0: for store or no op  1: most other operations 
-  MemtoReg  =	'b0;   // 1: load -- route memory instead of ALU to reg_file data in
-  ALUOp	    =   'b000; 
+  RegDst 	 = 'b0;   // 1: not in place  just leave 0
+  Branch 	 = 'b0;   // 1: branch (jump)
+  how_high = 'b00;  // 
+  MemWrite = 'b0;   // 1: store to memory
+  ALUSrc 	 = 'b0;   // 1: immediate  0: second reg file output
+  RegWrite = 'b1;   // 0: for store or no op  1: most other operations 
+  MemtoReg = 'b0;   // 1: load -- route memory instead of ALU to reg_file data in
+  ALUOp	   = 'b000; 
   sc_en    = 'b0;   
   sc_clr   = 'b1;
 // sample values only -- use what you need
