@@ -38,10 +38,6 @@ module top_level(
 // lookup table to facilitate jumps/branches
   PC_LUT #(.D(D))
     pl1 (.addr  (how_high),
-         .jt1 (dm.core[1]),
-         .jt2 (dm.core[2]),
-         .jt3 (dm.core[3]),
-         .jt4 (dm.core[4]),
          .target(target)          );   
 
 // contains machine code
