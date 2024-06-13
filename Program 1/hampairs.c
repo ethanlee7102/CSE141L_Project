@@ -14,7 +14,7 @@ int hamming_distance(int16_t a, int16_t b) {
 }
 
 int main() {
-    int16_t array[32] = { /* 32 half-word integers */ };
+    int16_t array[32];
     int min_distance = INT_MAX;
     int max_distance = 0;
 
