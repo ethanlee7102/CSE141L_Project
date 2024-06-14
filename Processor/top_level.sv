@@ -17,6 +17,7 @@ module top_level(
   wire  absj;                     // from control to PC; abs jump enable
   wire  pari,
         zero,
+        .sc_o,
 		sc_clr,
 		sc_en,
         MemWrite,
