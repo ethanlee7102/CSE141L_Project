@@ -5,8 +5,8 @@ module PC_LUT #(parameter D=12)(
   always_comb begin
     case(addr)
       0: target = 3;   
-      1: target = 10;   
-      2: target = 50;  
+      1: target = 10; 
+      2: target = 50;
       3: target = 100;
       default: target = 0;  // jumps to zero 
     endcase

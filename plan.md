@@ -7,7 +7,7 @@ eg. 000 001 010 = [r2 = r1 + r2]
 | ADD        | 000      | rA         | rB         |
 | SL        | 001      | rA         | rB         |
 | SR        | 010      | rA         | rB         |
-| NAND       | 011      | rA         | rB         |
+| XOR       | 011      | rA         | rB         |
 | SUB        | 100      | rA         | rB         |
 
 ## Instruction Set I-Type
@@ -20,7 +20,7 @@ eg. 000 001 010 = [r2 = r1 + r2]
 
 
  **For BZ**  
-(00) how high for lookup table)   
+(00) how high for lookup table   
  **For ADDI** 
 (00) is the immediate 
 eg. 111 1(10) 001 = [r1 = r1 + 2]
