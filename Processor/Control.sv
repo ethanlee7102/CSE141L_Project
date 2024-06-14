@@ -2,6 +2,7 @@
 module Control #(parameter opwidth = 3, mcodebits = 9)(
   input [mcodebits-1:0] instr,    // subset of machine code (any width you need)
   input logic zero,
+  input logic sc_o,
   output logic RegDst, Branch,
      MemtoReg, MemWrite, ALUSrc, RegWrite,
   output logic [1:0] how_high,
@@ -56,7 +57,6 @@ case(instr[8:6])    // override defaults with exceptions
       ALUSrc = 'b0;
       ALUOp = 'b100;  // SUB
       RegWrite  =	'b1;
-      sc_clr = 'b1;
       MemtoReg = 'b0;
   end
 
@@ -70,7 +70,7 @@ case(instr[8:6])    // override defaults with exceptions
   'b110:  begin					// store operation
       ALUSrc = 'b0;
       MemWrite = 'b1;      // write to data mem
-      RegWrite = 'b0;      // typically don't also load reg_file
+      RegWrite = 'b0;      // typicaly don't also load reg_file
       sc_clr = 'b1;
       MemtoReg = 'b0;
 	end
@@ -89,6 +89,7 @@ case(instr[8:6])    // override defaults with exceptions
     if (instr[5] == 'b0) begin
         ALUSrc = 'b0;
         Branch = ~zero;  // Branch if zero flag is not set
+        Branch = sc_o;
         sc_clr = 'b1;
         MemtoReg = 'b0;
     end

@@ -1,4 +1,4 @@
-ADD R1, R2
+ADD R1, R2 
 SL R3, R4
 SR R5, R6
 NAND R7, R0

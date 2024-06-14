@@ -47,6 +47,7 @@ module top_level(
 // control decoder
   Control ctl1(.instr(mach_code),
   .zero(zero),
+  .sc_o,
   .RegDst  (), 
   .Branch  (absj)  , 
   .how_high ,
