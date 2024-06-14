@@ -1,0 +1,149 @@
+# Registers:
+# R0 :  0   - Outer loop index (i)
+# R1 :  0   - Inner loop index (j)
+# R2 : 32   - Value at index i
+# R3 :  0   - Value at index j
+# R4 :  1   - Hamming distance
+# R5 : 16   - Minimum Hamming distance
+# R6 :  0   - Maximum Hamming distance
+# R7 : 32   - Temporary register for calculations and memory addresses
+
+# Constants
+# Initialize minimum distance to 16 (R5 = 16) R6 is already 0.
+ADDI 3, R5      # R5 = 3
+ADD R5, R5      # R5 = 6
+ADD R5, R5      # R5 = 12
+ADDI 3, R5      # R5 = 15
+ADDI 1, R5      # R5 = 16
+# ADDI 0, R6
+
+ADDI 3, R7      # R7 = 3
+ADDI 1, R7      # R7 = 4
+ADD R7, R7      # R7 = 8
+ADD R7, R7      # R7 = 16
+ADD R7, R7      # R7 = 32
+
+# Outer loop: for (int i = 0; i < 32; i++) 1st pair
+
+ADDI 0, R0
+ADDI R7, R0     # R0 = 0 + 32 = 32
+ADDI 1, R4      # R4 = 1
+SUB R4, R2      # R2 = R2 - R4 -> 32 - 1, -1, -1...
+BZ 0, R2        # Branch if equal to zero
+
+LD R0, R2       # load value at index i r2 = datamem[r0 (i)]
+                # r2 should have value of line 0 at this point
+ADDI 1, R0      # increment r0 for j
+LD R0, R3       # r3 should have value of line 1 at this point
+
+
+
+    # Inner loop: for (int j = i + 1; j < 32; j++) 2nd pair
+    ADD R7, R3      # R3 = 0 + 32 = 32
+    ADDI 1, R4      # R4 = 1
+    SUB R4, R3      # R3 = R3 - R4 -> 32 - 1, -1, -1...
+    BZ X, R2        # Branch if equal to zero
+
+        # ADDI 0, R1
+
+        LD R3, R7      # Load value at index j r7 = datamem[r3]
+
+
+        # loop with in each bit
+
+
+        xor each digit - index 0 for words 1 and 2 on lines 1 and 3
+        BZ if branch is 16 (aka max) then terminate early
+        BZ if branch is 0 aka min then terminate early
+
+
+
+
+
+# iterate thru 1 and 3, 2 and 4, etc.
+
+
+
+
+
+# Store Results
+ADD R7, R7      # R7 = 64
+ST R7, R5       # store the updated minimum hamming dist to memory[64]
+
+ADDI 1, R7      # R7 = 65
+ST R7, R6       # store the updated maximum hamming dist to memory[65]
+
+------------------
+
+# Outer loop (index i)
+ADDI R0, R0, 0     # Initialize i to 0
+outer_loop:
+    SUB R7, R0, 32
+    BZ R7, end_outer_loop  # If i == 32, end outer loop
+
+    # Load value from memory for index i
+    ADDI R7, R0, 0
+    LD R2, R7          # Load value at index i
+
+    # Inner loop (index j)
+    ADDI R1, R0, 1     # Initialize j to i + 1
+    inner_loop:
+        SUB R7, R1, 32
+        BZ R7, end_inner_loop  # If j == 32, end inner loop
+
+        # Load value from memory for index j
+        ADDI R7, R1, 0
+        LD R3, R7      # Load value at index j
+
+        # Calculate Hamming distance between R2 and R3
+        XOR R4, R2, R3   # XOR the two values
+
+        # Count number of 1's in R4
+        # R4 contains the XOR result; we'll use R7 as a temporary register
+        ADDI R7, R0, 0   # Initialize bit counter to 0
+
+        # Bit counting loop
+        bit_count_loop:
+            # Shift R4 right and check LSB
+            SR R4, R4, 1
+            ADDI R7, R7, 1  # Increment counter if LSB was 1
+            BZ R4, bit_count_end  # If R4 is zero, end bit counting loop
+            BR bit_count_loop
+        bit_count_end:
+        ADD R4, R7, R0  # Move count result back to R4
+
+        # Update minimum Hamming distance
+        SUB R7, R4, R5
+        BZ R7, skip_update_min
+        ADDI R7, R7, -1  # If R4 < R5, R7 will be negative
+        BZ R7, update_min
+        BR skip_update_min
+        update_min:
+            ADD R5, R4, R0
+        skip_update_min:
+
+        # Update maximum Hamming distance
+        SUB R7, R4, R6
+        BZ R7, skip_update_max
+        ADDI R7, R7, 1  # If R4 > R6, R7 will be positive
+        BZ R7, update_max
+        BR skip_update_max
+        update_max:
+            ADD R6, R4, R0
+        skip_update_max:
+
+        # Increment inner loop index j
+        ADDI R1, R1, 1
+        BR inner_loop
+    end_inner_loop:
+
+    # Increment outer loop index i
+    ADDI R0, R0, 1
+    BR outer_loop
+end_outer_loop:
+
+
+# End of program
+HALT
+
+------------------
