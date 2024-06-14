@@ -28,8 +28,8 @@ always_comb begin
     end*/
   3'b010: // right shift (alternative syntax -- works like left shift
 	  {rslt,sc_o} = {sc_i,inA};
-  3'b011: // NAND
-	  rslt = ~(inA & inB);
+  3'b011: // XOR
+	  rslt = (inA ^ inB);
 	3'b100: // SUB
 	  {sc_o,rslt} = inB - inA + sc_i;
     3'b111: // add 2 8-bit unsigned; automatically makes carry-out
